@@ -25,6 +25,7 @@ a
 .nav
     margin-top: 67px
     display: flex
+.container    
     justify-content: space-between
     width: calc(100vw - (100vw / 6))
 
@@ -116,12 +117,35 @@ a
     right: 0
     flex-direction: column
     background: rgba(0, 0, 0, 0.85)
-    transition: visibility 0.3s ease-in, opacity 0.3s
+    transition: visibility 0.5s, opacity 0.5s
+    text-align: center
     h3
         font-size: 48px
         color: white
 
-@media (max-width: 991px) 
+.footer
+    @extend %flex-center   
+    height: 165px
+    font-size: 14px     
+
+.footer__link
+    color: white
+.footer__coder
+    .coded
+        color: #ffc600    
+
+.back__arrow
+    opacity: .4
+    transition: opacity .3s
+    &:hover
+        opacity: 1
+
+@media (max-width: 1100px) 
     $columns: 2
+    .project
+        width: calc(100% / #{$columns})
+
+@media (max-width: 710px) 
+    $columns: 1
     .project
         width: calc(100% / #{$columns})
