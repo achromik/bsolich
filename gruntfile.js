@@ -73,8 +73,10 @@ module.exports = function (grunt) {
         uglify: {
             dev: {
                 options: {
-                    mangle: { properties: false,
-                    toplevel:true },
+                    mangle: {
+                        properties: false,
+                        toplevel: true
+                    },
                     sourceMap: {
                         includeSources: true,
                     }
@@ -133,9 +135,18 @@ module.exports = function (grunt) {
             main: {
                 expand: true,
                 cwd: 'dev',
-                src: ['**/*.min*', '**/*.sass'],
+                src: ['**/*.min*', '**/*.sass', 'assets/**'],
                 dest: 'build/',
             },
+        },
+
+        clean: ['build'],
+
+        'gh-pages': {
+            options: {
+                base: 'build'
+            },
+            src: ['**']
         },
 
         watch: {
@@ -202,29 +213,33 @@ module.exports = function (grunt) {
     });
 
 
-    // Load the plugins tasks
-    grunt.loadNpmTasks('grunt-sass');
-    grunt.loadNpmTasks('grunt-postcss');
-    grunt.loadNpmTasks('grunt-contrib-imagemin');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+// Load the plugins tasks
+grunt.loadNpmTasks('grunt-sass');
+grunt.loadNpmTasks('grunt-postcss');
+grunt.loadNpmTasks('grunt-contrib-imagemin');
+grunt.loadNpmTasks('grunt-contrib-watch');
 
-    //grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    // grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-uglify-es');
-    grunt.loadNpmTasks('grunt-browser-sync');
+//grunt.loadNpmTasks('grunt-contrib-cssmin');
+grunt.loadNpmTasks('grunt-contrib-jshint');
+// grunt.loadNpmTasks('grunt-contrib-uglify');
+grunt.loadNpmTasks('grunt-contrib-uglify-es');
+grunt.loadNpmTasks('grunt-browser-sync');
 
-    grunt.loadNpmTasks('grunt-contrib-htmlmin');
-    grunt.loadNpmTasks('grunt-contrib-copy');
+grunt.loadNpmTasks('grunt-contrib-htmlmin');
+grunt.loadNpmTasks('grunt-contrib-copy');
+
+grunt.loadNpmTasks('grunt-contrib-clean');
+grunt.loadNpmTasks('grunt-gh-pages');
 
 
 
-    // Default task(s).
-    grunt.registerTask('default', ['sass:dev', 'jshint', 'postcss:dev', 'uglify:dev', 'browserSync', 'watch']);
-    // grunt.registerTask('default', ['sass', 'jshint', 'postcss:dev', 'uglify:dev', 'htmlmin', 'browserSync', 'watch']);
-    // grunt.registerTask('default', ['sass', 'jshint', 'postcss:dist', 'imagemin', 'uglify', 'htmlmin', 'browserSync', 'watch']);
+// Default task(s).
+grunt.registerTask('default', ['sass:dev', 'jshint', 'postcss:dev', 'uglify:dev', 'browserSync', 'watch']);
+// grunt.registerTask('default', ['sass', 'jshint', 'postcss:dev', 'uglify:dev', 'htmlmin', 'browserSync', 'watch']);
+// grunt.registerTask('default', ['sass', 'jshint', 'postcss:dist', 'imagemin', 'uglify', 'htmlmin', 'browserSync', 'watch']);
 
-    // grunt.registerTask('build', ['sass', 'jshint', 'postcss:build', 'uglify:build', 'htmlmin']);
-    grunt.registerTask('prod', ['sass', 'jshint', 'postcss:dev', 'uglify:dev', 'copy', 'htmlmin']);
+// grunt.registerTask('build', ['sass', 'jshint', 'postcss:build', 'uglify:build', 'htmlmin']);
+grunt.registerTask('prod', ['clean', 'sass', 'jshint', 'postcss:dev', 'uglify:dev', 'copy', 'htmlmin']);
+grunt.registerTask('deploy', ['prod', 'gh-pages']);
 
 };
