@@ -40,25 +40,18 @@ module.exports = function (grunt) {
                     ext: '.min.css'
                 }]
             },
-            // build: {
-            //     files: [{
-            //         expand: true,
-            //         cwd: 'dev/css',
-            //         src: ['*.css', "!*.min.css"],
-            //         dest: 'build/css',
-            //         ext: '.min.css'
-            //     }]
-            // },
-
         },
 
         imagemin: {
+            options: {
+                optimizationLevel: 3
+            },
             dynamic: {
                 files: [{
                     expand: true,
-                    cwd: 'dev/assets',
-                    src: ['*.{png,jpg,jpeg,gif}'],
-                    dest: 'build/assets'
+                    cwd: 'dev/assets/',
+                    src: ['**/*.{png,jpg,jpeg,gif}'],
+                    dest: 'build/assets/'
                 }]
             }
         },
@@ -89,20 +82,6 @@ module.exports = function (grunt) {
                     ext: '.min.js'
                 }]
             },
-            // build: {
-            //     options: {
-            //         sourceMap: {
-            //             includeSources: true,
-            //         }
-            //     },
-            //     files: [{
-            //         expand: true,
-            //         cwd: 'dev/js',
-            //         src: ['*.js', '!*min.js'],
-            //         dest: 'build/js',
-            //         ext: '.min.js'
-            //     }]
-            // }
         },
 
         htmlmin: {                                     // Task
@@ -118,29 +97,31 @@ module.exports = function (grunt) {
             }
         },
 
-        // cssmin: {
-        //     target: {
-        //         files: [{
-        //             expand: true,
-        //             cwd: 'css', 
-        //             src: ['**/*.css', '!**/*.min.css'],
-        //             dest: 'css',
-        //             ext: '.min.css'
-        //         }]
+        cssmin: {
+            target: {
+                files: [{
+                    expand: true,
+                    cwd: 'css',
+                    src: ['**/*.css', '!**/*.min.css'],
+                    dest: 'css',
+                    ext: '.min.css'
+                }]
 
-        //     }
-        // },
+            }
+        },
 
         copy: {
             main: {
                 expand: true,
                 cwd: 'dev',
-                src: ['**/*.min*', '**/*.sass', 'assets/**'],
+                src: ['**/*.min*', '**/*.sass'],
                 dest: 'build/',
             },
         },
 
-        clean: ['build'],
+        clean: [
+            'build'
+        ],
 
         'gh-pages': {
             options: {
@@ -166,14 +147,6 @@ module.exports = function (grunt) {
                 },
             },
 
-            // imagemin: {
-            //     files: ['src/*.{png,jpg,jpeg,gif}'],
-            //     tasks: ['imagemin'],
-            //     options: {
-            //         spawn: true,
-            //     },               
-            // },
-
             scripts: {
                 files: ['dev/js/**/*.js', '!dev/js/**/*.min.js'],
                 tasks: ['uglify:dev', 'jshint'],
@@ -182,8 +155,6 @@ module.exports = function (grunt) {
                     spawn: true,
                 },
             },
-
-
 
             // cssmin: {
             //     files: ['**/*.css','!**/*.min.css'],
@@ -197,7 +168,6 @@ module.exports = function (grunt) {
         browserSync: {
             dev: {
                 bsFiles: {
-                    // src : ['css/*.css','*.html','*.css', 'js/*.min.js']
                     src: ['dev/css/*.css', 'dev/*.html', 'dev/js/*.js']
                 },
                 options: {
@@ -213,33 +183,30 @@ module.exports = function (grunt) {
     });
 
 
-// Load the plugins tasks
-grunt.loadNpmTasks('grunt-sass');
-grunt.loadNpmTasks('grunt-postcss');
-grunt.loadNpmTasks('grunt-contrib-imagemin');
-grunt.loadNpmTasks('grunt-contrib-watch');
+    // Load the plugins tasks
+    grunt.loadNpmTasks('grunt-sass');
+    grunt.loadNpmTasks('grunt-postcss');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
-//grunt.loadNpmTasks('grunt-contrib-cssmin');
-grunt.loadNpmTasks('grunt-contrib-jshint');
-// grunt.loadNpmTasks('grunt-contrib-uglify');
-grunt.loadNpmTasks('grunt-contrib-uglify-es');
-grunt.loadNpmTasks('grunt-browser-sync');
+    //grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    // grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-uglify-es');
+    grunt.loadNpmTasks('grunt-browser-sync');
 
-grunt.loadNpmTasks('grunt-contrib-htmlmin');
-grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
-grunt.loadNpmTasks('grunt-contrib-clean');
-grunt.loadNpmTasks('grunt-gh-pages');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-gh-pages');
 
+    // Default task(s).
+    grunt.registerTask('default', ['sass:dev', 'jshint', 'postcss:dev', 'uglify:dev', 'browserSync', 'watch']);
+    grunt.registerTask('prod', ['clean', 'sass', 'jshint', 'postcss:dev', 'uglify:dev', 'copy', 'imagemin', 'htmlmin']);
+    grunt.registerTask('deploy', ['prod', 'gh-pages']);
 
-
-// Default task(s).
-grunt.registerTask('default', ['sass:dev', 'jshint', 'postcss:dev', 'uglify:dev', 'browserSync', 'watch']);
-// grunt.registerTask('default', ['sass', 'jshint', 'postcss:dev', 'uglify:dev', 'htmlmin', 'browserSync', 'watch']);
-// grunt.registerTask('default', ['sass', 'jshint', 'postcss:dist', 'imagemin', 'uglify', 'htmlmin', 'browserSync', 'watch']);
-
-// grunt.registerTask('build', ['sass', 'jshint', 'postcss:build', 'uglify:build', 'htmlmin']);
-grunt.registerTask('prod', ['clean', 'sass', 'jshint', 'postcss:dev', 'uglify:dev', 'copy', 'htmlmin']);
-grunt.registerTask('deploy', ['prod', 'gh-pages']);
-
+    // grunt.registerTask('default', ['sass', 'jshint', 'postcss:dev', 'uglify:dev', 'htmlmin', 'browserSync', 'watch']);
+    // grunt.registerTask('default', ['sass', 'jshint', 'postcss:dist', 'imagemin', 'uglify', 'htmlmin', 'browserSync', 'watch']);
+    // grunt.registerTask('build', ['sass', 'jshint', 'postcss:build', 'uglify:build', 'htmlmin']);
 };
