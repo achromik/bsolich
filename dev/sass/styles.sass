@@ -1,15 +1,8 @@
 $columns: 3
 $black: #1a1a1a
 
-* 
-    margin : 0
-
-.jumptarget
-    &:before 
-        content: ""
-        display: block
-        height: 75px
-        margin: -75px 0 0
+*
+    margin: 0
 
 %flex-center
     display: flex
@@ -22,7 +15,7 @@ body
     font-family: Roboto
     background: $black
     color: #b5b5b5
-    font-size: 18px
+    font-size: 16px
     margin: 0
     min-height: 100vh
     flex-direction: column
@@ -38,9 +31,11 @@ a
     height: 75px
     background: $black
     position: fixed
+
     // transition: margin .3s linear
     padding-top: 60px
     z-index: 99
+
 .container
     justify-content: space-between
     width: calc(100% - (100% / 6))
@@ -49,6 +44,7 @@ a
 
 .nav__links
     @extend %flex-center
+
     list-style: none
     padding: 0
     margin: 0
@@ -58,18 +54,20 @@ a
     @extend %flex-center
 
 .nav__link
-    width: 110px
     height: 45px
-    border: 2px solid #303030
     margin: 0 20px
-    border-radius: 23px
     transition: 0.2s ease-out
 
     &:hover
         border-color: #ffffff
         color: #ffffff
 
-.scroll-downs 
+.nav__link-bordered
+    border-radius: 23px
+    border: 2px solid #303030
+    width: 110px
+
+.scroll-downs
     position: absolute
     right: 0
     bottom: 31px
@@ -78,38 +76,41 @@ a
     width: 34px
     height: 55px
 
-.mousey 
+.mousey
     width: 3px
     padding: 6px 10px
     height: 35px
-    border: 2px solid rgba(255,255,255,128)
+    border: 2px solid rgba(255, 255, 255, 128)
     border-radius: 25px
+
     // opacity: 0.75
     box-sizing: content-box
 
-.scroller 
+.scroller
     width: 3px
     height: 10px
     border-radius: 25%
     background-color: #fff
     animation-name: scroll
     animation-duration: 2.2s
-    animation-timing-function: cubic-bezier(.15,.41,.69,.94)
+    animation-timing-function: cubic-bezier(0.15, 0.41, 0.69, 0.94)
     animation-iteration-count: infinite
 
-@keyframes scroll 
-    0% 
+@keyframes scroll
+    0%
         opacity: 0
+
     10%
-        transform: translateY(0) 
+        transform: translateY(0)
         opacity: 1
-    100% 
-        transform: translateY(15px) 
+
+    100%
+        transform: translateY(15px)
         opacity: 0
-        
 
 .main
     @extend %flex-center
+
     flex-direction: column
     height: calc(100vh - 135px)
     width: 100%
@@ -118,6 +119,7 @@ a
 
 .wrapper
     @extend %flex-center
+
     position: absolute
     flex-direction: column
 
@@ -128,13 +130,18 @@ a
     max-width: 800px
     text-align: center
     color: #9f9f9f
-    margin-bottom: 130px
+    max-width: 80%
 
 .main__text-lightner
     color: white
 
 .main__link
     @extend %flex-center
+
+    font-size: 18px
+    margin-top: 25px
+
+    // font-weight: 700
 
     span
         font-size: 1.4rem
@@ -147,7 +154,6 @@ a
     &:hover
         color: white
 
-
 .projects
     @extend %flex-center
 
@@ -155,15 +161,16 @@ a
 
 .project
     width: calc(100% / #{$columns})
-    opacity: 0
-    transition: 0.6s ease-in
-    transform: scale(0.75) rotateZ(90deg)
-    &:nth-of-type(2n)
-        transform: scale(0.75) rotateZ(-90deg)
 
-    &.active
-        opacity: 1
-        transform: scale(1) 
+    // // opacity: 0
+    // transition: 0.6s ease-in
+    // // transform: scale(0.75) rotateZ(90deg)
+    // &:nth-of-type(2n)
+    //     transform: scale(0.75) rotateZ(-90deg)
+
+    // &.active
+    //     opacity: 1
+    //     transform: scale(1)
 
 .project__link
     height: 100%
@@ -203,8 +210,9 @@ a
     text-align: center
 
     h3
-        font-size: 48px
+        font-size: 44px
         color: white
+        
 
 .footer
     @extend %flex-center
@@ -216,12 +224,16 @@ a
     color: white
 
 .footer__coder
+    margin-top: 20px
+
     .coded
         color: #ffc600
 
 .back__arrow
+    color: white
     opacity: 0.4
     transition: opacity 0.3s
+    cursor: pointer
 
     &:hover
         opacity: 1
@@ -235,5 +247,45 @@ a
 @media (max-width: 710px)
     $columns: 1
 
+    body
+        font-size: 14px
+
+    .nav
+        flex-direction: column
+        padding: 20px 10px 10px 10px
+        width: 100%
+
+    .nav__logo
+        margin-bottom: 30px
+
+    .nav__link
+        margin: 0 15px
+        height: 35px
+
+    .nav__link-bordered
+        width: 95px
+
+    .main__text
+        font-size: 44px
+        line-height: 48px 
+        padding: 0 15px  
+
     .project
         width: calc(100% / #{$columns})
+
+@media (max-width: 710px), (max-height: 600px) 
+    .scroll-downs
+        display: none          
+
+@media (max-width: 450px)
+    .main__text
+        font-size: 34px
+        line-height: 40px 
+        padding: 0 15px  
+
+    .footer
+        height: 120px    
+
+    .footer__coder,
+    .footer__rights
+        font-size: 11px

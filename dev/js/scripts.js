@@ -9,16 +9,16 @@ const hashAnchors = document.querySelectorAll('a[href*="#"]');
 const navigationOffset = parseInt(getComputedStyle(document.querySelector('.nav')).height, 10);
 
 hashAnchors.forEach(anchor => {
-    anchor.addEventListener('click', () => scrollIt(document.querySelector(anchor.hash).offsetTop - navigationOffset , 500));
+    anchor.addEventListener('click', () => scrollIt(document.querySelector(anchor.hash).offsetTop - navigationOffset, 500));
 });
 
-window.addEventListener('scroll', debounce(showProject));
+// window.addEventListener('scroll', debounce(showProject));
 window.addEventListener('scroll', slideNavigationBar);
 backArrow.addEventListener('click', scrollToTop);
 
-particlesJS.load('particles-js', 'js/particlesjs-config.json', function() {
+particlesJS.load('particles-js', 'js/particlesjs-config.json', function () {
     console.log('callback - particles.js config loaded');
-  });
+});
 
 
 
@@ -129,23 +129,27 @@ function scrollIt(destination, duration = 200, easing = 'linear', callback = () 
     scroll();
 }
 
-
-
-
-
-
 function getNavigationBarMarginTop() {
-    const style = window.getComputedStyle ? getComputedStyle(navigationBar, null) : navigationBar.currentStyle;
-    return parseInt(style.paddingTop, 10);
+    if (window.innerWidth > 710) {
+        const style = window.getComputedStyle ? getComputedStyle(navigationBar, null) : navigationBar.currentStyle;
+        return parseInt(style.paddingTop, 10);
+    } else {
+        const element = document.querySelector('.nav__link-bordered');
+        console.log(element.offsetTop);
+        return element.offsetTop-3;
+    }
 }
 
 function slideNavigationBar() {
+    console.log(window.innerWidth);
+
     navigationBar.style.marginTop = (window.scrollY < navigationBarMarginTop) ?
         -window.scrollY + 'px' :
         -navigationBarMarginTop + 'px';
+
 }
 
 function scrollToTop() {
     scrollIt(top, 500, 'easeOutQuint');
-    window.location.hash='';
+    window.location.hash = '';
 }
