@@ -16,7 +16,7 @@ window.addEventListener('scroll', debounce(showProject));
 window.addEventListener('scroll', slideNavigationBar);
 backArrow.addEventListener('click', scrollToTop);
 
-particlesJS.load('particles-js', '/assets/particlesjs-config.json', function() {
+particlesJS.load('particles-js', 'js/particlesjs-config.json', function() {
     console.log('callback - particles.js config loaded');
   });
 

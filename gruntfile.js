@@ -114,7 +114,7 @@ module.exports = function (grunt) {
             main: {
                 expand: true,
                 cwd: 'dev',
-                src: ['**/*.min*', '**/*.sass'],
+                src: ['**/*.min*', '**/*.sass', '**/*.json'],
                 dest: 'build/',
             },
         },
