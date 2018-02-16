@@ -1,6 +1,9 @@
 $columns: 3
 $black: #1a1a1a
 
+* 
+    margin : 0
+
 .jumptarget
     &:before 
         content: ""
@@ -40,9 +43,9 @@ a
     z-index: 99
 .container
     justify-content: space-between
-    width: calc(100vw - (100vw / 6))
-    padding-left: 8.33vw
-    padding-right: 8.33vw
+    width: calc(100% - (100% / 6))
+    padding-left: 8.33%
+    padding-right: 8.33%
 
 .nav__links
     @extend %flex-center
@@ -107,9 +110,15 @@ a
 
 .main
     @extend %flex-center
+    flex-direction: column
+    height: calc(100vh - 135px)
+    width: 100%
+    margin-top: 135px
+    position: relative
 
-    // height: 375px
-    height: 100vh
+.wrapper
+    @extend %flex-center
+    position: absolute
     flex-direction: column
 
 .main__text
@@ -119,6 +128,7 @@ a
     max-width: 800px
     text-align: center
     color: #9f9f9f
+    margin-bottom: 130px
 
 .main__text-lightner
     color: white
