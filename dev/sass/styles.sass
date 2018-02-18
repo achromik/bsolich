@@ -11,7 +11,6 @@ $black: #1a1a1a
 
 body
     @extend %flex-center
-
     font-family: Roboto
     background: $black
     color: #b5b5b5
@@ -31,8 +30,6 @@ a
     height: 75px
     background: $black
     position: fixed
-
-    // transition: margin .3s linear
     padding-top: 60px
     z-index: 99
 
@@ -44,7 +41,6 @@ a
 
 .nav__links
     @extend %flex-center
-
     list-style: none
     padding: 0
     margin: 0
@@ -52,6 +48,10 @@ a
 .nav__logo,
 .nav__link
     @extend %flex-center
+
+.nav__logo
+    img
+        display: block        
 
 .nav__link
     height: 45px
@@ -66,6 +66,8 @@ a
     border-radius: 23px
     border: 2px solid #303030
     width: 110px
+.hamburger
+    display: none    
 
 .scroll-downs
     position: absolute
@@ -82,9 +84,8 @@ a
     height: 35px
     border: 2px solid rgba(255, 255, 255, 128)
     border-radius: 25px
-
-    // opacity: 0.75
     box-sizing: content-box
+    opacity: 0.75
 
 .scroller
     width: 3px
@@ -251,19 +252,42 @@ a
         font-size: 14px
 
     .nav
-        flex-direction: column
-        padding: 20px 10px 10px 10px
-        width: 100%
+        padding-top: 0
+        height: 55px
+        height: 55px
+        background: #1a1a1a
+        position: fixed
 
-    .nav__logo
-        margin-bottom: 30px
+    .nav__links
+        position: absolute
+        top: 55px
+        left: 0
+        right: 0
+        width: 100vw
+        height: calc(100vh - 55px)
+        transition: .4s linear
+        background: rgba(26, 26, 26, 0.96)
+        z-index: -1
+        flex-direction: column
+        transform: translateX(-100%)
+    .fixed
+        transform: translateX(0)
+        transition: .4s cubic-bezier(0, 0.45, 0.56, 0.96)
 
     .nav__link
-        margin: 0 15px
-        height: 35px
+        margin: 20px 0
+        // height: 65px
+        font-size: 18px
 
     .nav__link-bordered
         width: 95px
+
+    .hamburger
+        display: inline-block   
+
+    .main  
+        height: calc(100vh - 55px)
+        margin-top: 55px   
 
     .main__text
         font-size: 44px

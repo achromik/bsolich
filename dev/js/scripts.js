@@ -1,12 +1,23 @@
 const navigationBar = document.querySelector('.nav');
 const navigationBarMarginTop = getNavigationBarMarginTop();
 
-const projects = document.querySelectorAll('.project');
+// const projects = document.querySelectorAll('.project');
 const backArrow = document.querySelector('.back__arrow');
 const top = document.querySelector('body');
 
 const hashAnchors = document.querySelectorAll('a[href*="#"]');
 const navigationOffset = parseInt(getComputedStyle(document.querySelector('.nav')).height, 10);
+
+const hamburgerButton = document.querySelector('.hamburger');
+const navigationMenu = navigationBar.querySelector('.nav__links');
+const menuLinks = navigationMenu.querySelectorAll('a');
+
+
+menuLinks.forEach(link => {
+    link.addEventListener('click', toggleCollapseMenu);
+});
+
+
 
 hashAnchors.forEach(anchor => {
     anchor.addEventListener('click', () => scrollIt(document.querySelector(anchor.hash).offsetTop - navigationOffset, 500));
@@ -16,38 +27,52 @@ hashAnchors.forEach(anchor => {
 window.addEventListener('scroll', slideNavigationBar);
 backArrow.addEventListener('click', scrollToTop);
 
-particlesJS.load('particles-js', 'js/particlesjs-config.json', function () {
-    console.log('callback - particles.js config loaded');
-});
+hamburgerButton.addEventListener('click', toggleCollapseMenu);
 
 
 
+particlesJS.load('particles-js', 'js/particlesjs-config.json');
 
 
-function debounce(func, wait = 20, immediate = true) {
-    var timeout;
-    return function () {
-        var context = this, args = arguments;
-        var later = function () {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        };
-        var callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-    };
-}
-
-function showProject() {
-    projects.forEach(project => {
-        const showAt = (window.scrollY + window.innerHeight) - (project.offsetHeight * 0.3);
-        const isPartialShown = showAt > project.offsetTop;
-        if (isPartialShown) {
-            project.classList.add('active');
+function toggleCollapseMenu() {
+    if (window.innerWidth <= 710) {
+        hamburgerButton.classList.toggle('is-active');
+        navigationMenu.classList.toggle('fixed');
+        if (navigationMenu.classList.contains('fixed')) {
+            disableScrolling();
+        } else {
+            enableScrolling();
         }
-    });
+    }
 }
+
+
+
+
+// function debounce(func, wait = 20, immediate = true) {
+//     var timeout;
+//     return function () {
+//         var context = this, args = arguments;
+//         var later = function () {
+//             timeout = null;
+//             if (!immediate) func.apply(context, args);
+//         };
+//         var callNow = immediate && !timeout;
+//         clearTimeout(timeout);
+//         timeout = setTimeout(later, wait);
+//         if (callNow) func.apply(context, args);
+//     };
+// }
+
+// function showProject() {
+//     projects.forEach(project => {
+//         const showAt = (window.scrollY + window.innerHeight) - (project.offsetHeight * 0.3);
+//         const isPartialShown = showAt > project.offsetTop;
+//         if (isPartialShown) {
+//             project.classList.add('active');
+//         }
+//     });
+// }
 
 
 function scrollIt(destination, duration = 200, easing = 'linear', callback = () => { }) {
@@ -133,23 +158,31 @@ function getNavigationBarMarginTop() {
     if (window.innerWidth > 710) {
         const style = window.getComputedStyle ? getComputedStyle(navigationBar, null) : navigationBar.currentStyle;
         return parseInt(style.paddingTop, 10);
-    } else {
-        const element = document.querySelector('.nav__link-bordered');
-        console.log(element.offsetTop);
-        return element.offsetTop-3;
     }
+    // else {
+    //     const element = document.querySelector('.nav__link-bordered');
+    //     console.log(element.offsetTop);
+    //     return element.offsetTop-3;
+    // }
 }
 
 function slideNavigationBar() {
-    console.log(window.innerWidth);
-
     navigationBar.style.marginTop = (window.scrollY < navigationBarMarginTop) ?
         -window.scrollY + 'px' :
         -navigationBarMarginTop + 'px';
-
 }
 
 function scrollToTop() {
     scrollIt(top, 500, 'easeOutQuint');
     window.location.hash = '';
+}
+
+function disableScrolling() {
+    var x = window.scrollX;
+    var y = window.scrollY;
+    window.onscroll = function () { window.scrollTo(x, y); };
+}
+
+function enableScrolling() {
+    window.onscroll = function () { };
 }

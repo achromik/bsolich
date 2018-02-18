@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bartosz Solich </title>
-    <link rel="stylesheet" href="css/styles.min.css">
+    <link href="css/hamburgers.min.css" rel="stylesheet">
+    <link href="css/styles.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=latin-ext" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
 </head>
 
 <body>
@@ -18,7 +20,7 @@
                 <img src="assets/logo.png" alt="Logo - Bartosz Solich">
             </a>
         </div>
-        <ul class="nav__links">
+        <ul class="nav__links ">
             <li>
                 <a class="nav__link" href="#projects">Projekty</a>
             </li>
@@ -29,6 +31,11 @@
                 <a class="nav__link nav__link-bordered" href="mailto:kontakt@bsolich.pl">Kontakt</a>
             </li>
         </ul>
+        <button class="hamburger hamburger--arrow" type="button">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+        </button>
     </nav>
     <header id="particles-js" class="main">
         <div class="wrapper">
@@ -37,7 +44,7 @@
                 <span class="main__text-lightner">zaprojektuję.</span>
             </h1>
             <p class="main__link">
-                <span>&#x1F582</span>
+                <span>&#x1F582;</span>
                 <a href="mailto:kontakt@bsolich.pl"> Napisz do mnie</a>
             </p>
         </div>
@@ -138,14 +145,12 @@
             <p class="footer__coder">
                 <span class="coded">
                     &lt;/&gt;
-                </span> Aleksander Chromik
+                </span>
                 <a class="footer__link" href="http://aleksanderchromik.pl">aleksanderchromik.pl</a>
             </p>
         </div>
         <div class="back__arrow">
             <i class="fas fa-arrow-circle-up fa-3x"></i>
-
-
         </div>
     </footer>
     <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
