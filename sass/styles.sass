@@ -271,31 +271,47 @@ a
 
     .nav__links
         position: absolute
-        top: 55px
+        top: 0
         left: 0
         right: 0
         width: 100vw
-        height: calc(100vh - 55px)
+        height: 100vh 
         transition: .4s linear
-        background: rgba(26, 26, 26, 0.96)
+        background: white
+        color: $black
         z-index: -1
         flex-direction: column
         transform: translateX(-100%)
+        box-sizing: border-box
+        
     .fixed
         transform: translateX(0)
         transition: .4s cubic-bezier(0, 0.45, 0.56, 0.96)
+    .logo__image-inverted
+        filter: invert(100%)    
+        transition: .3s .4s linear
 
     .nav__link
         margin: 20px 0
-        // height: 65px
-        font-size: 18px
+        font-size: 48px
+        font-weight: bold
+        &:hover
+            transform: scale(1.15)
+            transition: .2s
+            color: $black
 
     .nav__link-bordered
-        width: 95px
+        // width: 95px
+        border: none
 
     .hamburger
-        display: inline-block   
-
+        display: inline-block  
+    
+    .is-active 
+        .hamburger-inner, 
+        .hamburger-inner:after, 
+        .hamburger-inner:before      
+            background-color: black
     .main  
         height: calc(100vh - 55px)
         margin-top: 55px   
