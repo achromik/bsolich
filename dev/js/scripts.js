@@ -11,7 +11,7 @@ const navigationOffset = parseInt(getComputedStyle(document.querySelector('.nav'
 const hamburgerButton = document.querySelector('.hamburger');
 const navigationMenu = navigationBar.querySelector('.nav__links');
 const menuLinks = navigationMenu.querySelectorAll('a');
-
+const logoImage = navigationBar.querySelector('.logo__image');
 
 menuLinks.forEach(link => {
     link.addEventListener('click', toggleCollapseMenu);
@@ -38,6 +38,7 @@ function toggleCollapseMenu() {
     if (window.innerWidth <= 710) {
         hamburgerButton.classList.toggle('is-active');
         navigationMenu.classList.toggle('fixed');
+        logoImage.classList.toggle('logo__image-inverted');
         if (navigationMenu.classList.contains('fixed')) {
             disableScrolling();
         } else {
