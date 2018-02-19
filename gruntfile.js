@@ -50,7 +50,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: 'dev/assets/',
-                    src: ['**/*.{png,jpg,jpeg,gif}'],
+                    src: ['**/*.{png,jpg,jpeg,gif}', '!icons/**'],
                     dest: 'build/assets/'
                 }]
             }
@@ -114,7 +114,7 @@ module.exports = function (grunt) {
             main: {
                 expand: true,
                 cwd: 'dev',
-                src: ['**/*.min*', '**/*.sass', '**/*.json'],
+                src: ['**/*.min*', '**/*.sass', '**/*.json', 'assets/icons/*'],
                 dest: 'build/',
             },
         },
@@ -178,6 +178,67 @@ module.exports = function (grunt) {
                     }
                 }
             }
+        },
+        realFavicon: {
+            favicons: {
+                src: 'dev/src/favicon.png',
+                dest: 'dev/assets/icons',
+                options: {
+                    iconsPath: '/assets/icons',
+                    html: ['dev/*.html'],
+                    design: {
+                        ios: {
+                            pictureAspect: 'noChange',
+                            assets: {
+                                ios6AndPriorIcons: false,
+                                ios7AndLaterIcons: false,
+                                precomposedIcons: false,
+                                declareOnlyDefaultIcon: true
+                            }
+                        },
+                        desktopBrowser: {},
+                        windows: {
+                            pictureAspect: 'noChange',
+                            backgroundColor: '#da532c',
+                            onConflict: 'override',
+                            assets: {
+                                windows80Ie10Tile: false,
+                                windows10Ie11EdgeTiles: {
+                                    small: false,
+                                    medium: true,
+                                    big: false,
+                                    rectangle: false
+                                }
+                            }
+                        },
+                        androidChrome: {
+                            pictureAspect: 'noChange',
+                            themeColor: '#ffffff',
+                            manifest: {
+                                display: 'standalone',
+                                orientation: 'notSet',
+                                onConflict: 'override',
+                                declared: true
+                            },
+                            assets: {
+                                legacyIcon: false,
+                                lowResolutionIcons: false
+                            }
+                        },
+                        safariPinnedTab: {
+                            pictureAspect: 'silhouette',
+                            themeColor: '#5bbad5'
+                        }
+                    },
+                    settings: {
+                        scalingAlgorithm: 'Mitchell',
+                        errorOnImageTooSmall: false,
+                        readmeFile: false,
+                        htmlCodeFile: false,
+                        usePathAsIs: false
+                    }
+                }
+            }
         }
 
     });
@@ -201,10 +262,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-gh-pages');
 
+    grunt.loadNpmTasks('grunt-real-favicon');
+
     // Default task(s).
     grunt.registerTask('default', ['sass:dev', 'jshint', 'postcss:dev', 'uglify:dev', 'browserSync', 'watch']);
-    grunt.registerTask('prod', ['clean', 'sass', 'jshint', 'postcss:dev', 'uglify:dev', 'copy', 'imagemin', 'htmlmin']);
-    grunt.registerTask('deploy', ['prod', 'gh-pages']);
+    grunt.registerTask('build', ['clean', 'realFavicon', 'sass', 'jshint', 'postcss:dev', 'uglify:dev', 'copy', 'imagemin', 'htmlmin']);
+    grunt.registerTask('deploy', ['build', 'gh-pages']);
 
     // grunt.registerTask('default', ['sass', 'jshint', 'postcss:dev', 'uglify:dev', 'htmlmin', 'browserSync', 'watch']);
     // grunt.registerTask('default', ['sass', 'jshint', 'postcss:dist', 'imagemin', 'uglify', 'htmlmin', 'browserSync', 'watch']);
