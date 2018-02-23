@@ -19,10 +19,21 @@ body
     min-height: 100vh
     flex-direction: column
     justify-content: flex-start
+    overflow-x: hidden
+    overflow-y: auto
 
 a
     text-decoration: none
     color: inherit
+
+.animate-in
+    animation: fadeIn .5s ease-in
+
+@keyframes fadeIn 
+    from
+        opacity: 0
+    to
+        opacity: 1
 
 .nav
     margin-top: 0px
@@ -32,27 +43,34 @@ a
     position: fixed
     padding-top: 60px
     z-index: 99
-    
+    pointer-events: none
+    transition: background .4s
+
 .bg
     background: $black
+    pointer-events: initial
 
 .container
     justify-content: space-between
-    width: calc(100% - (100% / 6))
-    padding-left: 8.33%
-    padding-right: 8.33%
+    width: calc(100vw - (100vw / 6))
+    padding-left: 8.33vw
+    padding-right: 8.33vw
+    overflow-x: hidden
+    left: 0
 
 .nav__links
     @extend %flex-center
     list-style: none
     padding: 0
     margin: 0
+    pointer-events: initial
 
 .nav__logo,
 .nav__link
     @extend %flex-center
 
 .nav__logo
+    pointer-events: initial
     img
         display: block        
 
