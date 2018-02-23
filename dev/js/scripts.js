@@ -171,6 +171,13 @@ function slideNavigationBar() {
     navigationBar.style.marginTop = (window.scrollY < navigationBarMarginTop) ?
         -window.scrollY + 'px' :
         -navigationBarMarginTop + 'px';
+
+        if(window.scrollY >= navigationBarMarginTop) {
+            navigationBar.classList.add('bg');
+        } else {
+            navigationBar.classList.remove('bg');
+        }
+
 }
 
 function scrollToTop() {
