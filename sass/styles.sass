@@ -28,13 +28,10 @@ a
     margin-top: 0px
     display: flex
     height: 75px
-    // background: $black
+    background: $black
     position: fixed
     padding-top: 60px
     z-index: 99
-    
-.bg
-    background: $black
 
 .container
     justify-content: space-between
@@ -80,7 +77,6 @@ a
     margin: auto
     width: 34px
     height: 55px
-    pointer-events: none
 
 .mousey
     width: 3px
@@ -117,14 +113,12 @@ a
     @extend %flex-center
 
     flex-direction: column
-    // height: calc(100vh - 135px)
-    height: 100vh
+    height: calc(100vh - 135px)
     width: 100%
-    // margin-top: 135px
+    margin-top: 135px
     position: relative
 
 .wrapper
-    pointer-events: none
     @extend %flex-center
 
     position: absolute
@@ -144,21 +138,26 @@ a
 
 .main__link
     @extend %flex-center
+
     font-size: 18px
     margin-top: 25px
-    pointer-events: initial
+
     // font-weight: 700
+
     span
         font-size: 1.4rem
         font-weight: 700
         margin-right: 10px
+
     a
         text-decoration: underline
+
     &:hover
         color: white
 
-.projects
+.project_pages
     @extend %flex-center
+
     flex-wrap: wrap
 
 .project
@@ -214,10 +213,28 @@ a
     h3
         font-size: 44px
         color: white
-        
+
+.project_page
+    @extend .container
+    height: calc(100vh - 135px)
+    margin-top: 135px
+    position: relative
+    justify-content: flex-start
+    align-content: flex-start
+    flex-direction: row
+    .project_name
+        color: white
+        margin-top: 5rem
+        font-size: 48px
+    .project_desc
+        color: white
+        font-size: 1.2em
+        margin-top: 3rem
+
 
 .footer
     @extend %flex-center
+
     height: 165px
     font-size: 14px
 
@@ -287,7 +304,6 @@ a
     .fixed
         transform: translateX(0)
         transition: .4s cubic-bezier(0, 0.45, 0.56, 0.96)
-
     .logo__image-inverted
         filter: invert(100%)    
         transition: .3s .4s linear
@@ -313,6 +329,7 @@ a
         .hamburger-inner:after, 
         .hamburger-inner:before      
             background-color: black
+
     .main  
         height: calc(100vh - 55px)
         margin-top: 55px   
@@ -322,6 +339,15 @@ a
         line-height: 48px 
         padding: 0 15px  
         max-width: 80%
+
+    .project
+        height: calc(100vh - 55px)
+        margin-top: 55px   
+        text-align: left
+
+    .project_name
+        font-size: 44px
+
 
 @media (max-width: 710px), (max-height: 600px) 
     .scroll-downs
