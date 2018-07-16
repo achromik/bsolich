@@ -1,54 +1,56 @@
-const navigationBar = document.querySelector('.nav');
+const navigationBar = document.querySelector(".nav");
 const navigationBarMarginTop = getNavigationBarMarginTop();
 
 // const projects = document.querySelectorAll('.project');
-const backArrow = document.querySelector('.back__arrow');
-const top = document.querySelector('body');
+const backArrow = document.querySelector(".back__arrow");
+const top = document.querySelector("body");
 
 const hashAnchors = document.querySelectorAll('a[href*="#"]');
-const navigationOffset = parseInt(getComputedStyle(document.querySelector('.nav')).height, 10);
+const navigationOffset = parseInt(
+  getComputedStyle(document.querySelector(".nav")).height,
+  10
+);
 
-const hamburgerButton = document.querySelector('.hamburger');
-const navigationMenu = navigationBar.querySelector('.nav__links');
-const menuLinks = navigationMenu.querySelectorAll('a');
-const logoImage = navigationBar.querySelector('.logo__image');
+const hamburgerButton = document.querySelector(".hamburger");
+const navigationMenu = navigationBar.querySelector(".nav__links");
+const menuLinks = navigationMenu.querySelectorAll("a");
+const logoImage = navigationBar.querySelector(".logo__image");
 
 menuLinks.forEach(link => {
-    link.addEventListener('click', toggleCollapseMenu);
+  link.addEventListener("click", toggleCollapseMenu);
 });
 
-
-
 hashAnchors.forEach(anchor => {
-    anchor.addEventListener('click', () => scrollIt(document.querySelector(anchor.hash).offsetTop - navigationOffset, 500));
+  anchor.addEventListener("click", () =>
+    scrollIt(
+      document.querySelector(anchor.hash).offsetTop - navigationOffset,
+      500
+    )
+  );
 });
 
 // window.addEventListener('scroll', debounce(showProject));
-window.addEventListener('scroll', slideNavigationBar);
-backArrow.addEventListener('click', scrollToTop);
+window.addEventListener("scroll", slideNavigationBar);
+backArrow.addEventListener("click", scrollToTop);
 
-hamburgerButton.addEventListener('click', toggleCollapseMenu);
+hamburgerButton.addEventListener("click", toggleCollapseMenu);
 
-
-
-particlesJS.load('particles-js', 'js/particlesjs-config.json');
-
-
-function toggleCollapseMenu() {
-    if (window.innerWidth <= 710) {
-        hamburgerButton.classList.toggle('is-active');
-        navigationMenu.classList.toggle('fixed');
-        logoImage.classList.toggle('logo__image-inverted');
-        if (navigationMenu.classList.contains('fixed')) {
-            disableScrolling();
-        } else {
-            enableScrolling();
-        }
-    }
+if (document.querySelector("#particles-js")) {
+  particlesJS.load("particles-js", "js/particlesjs-config.json");
 }
 
-
-
+function toggleCollapseMenu() {
+  if (window.innerWidth <= 710) {
+    hamburgerButton.classList.toggle("is-active");
+    navigationMenu.classList.toggle("fixed");
+    logoImage.classList.toggle("logo__image-inverted");
+    if (navigationMenu.classList.contains("fixed")) {
+      disableScrolling();
+    } else {
+      enableScrolling();
+    }
+  }
+}
 
 // function debounce(func, wait = 20, immediate = true) {
 //     var timeout;
@@ -75,115 +77,142 @@ function toggleCollapseMenu() {
 //     });
 // }
 
+function scrollIt(
+  destination,
+  duration = 200,
+  easing = "linear",
+  callback = () => {}
+) {
+  const easings = {
+    linear(t) {
+      return t;
+    },
+    easeInQuad(t) {
+      return t * t;
+    },
+    easeOutQuad(t) {
+      return t * (2 - t);
+    },
+    easeInOutQuad(t) {
+      return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    },
+    easeInCubic(t) {
+      return t * t * t;
+    },
+    easeOutCubic(t) {
+      return --t * t * t + 1;
+    },
+    easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+    },
+    easeInQuart(t) {
+      return t * t * t * t;
+    },
+    easeOutQuart(t) {
+      return 1 - --t * t * t * t;
+    },
+    easeInOutQuart(t) {
+      return t < 0.5 ? 8 * t * t * t * t : 1 - 8 * --t * t * t * t;
+    },
+    easeInQuint(t) {
+      return t * t * t * t * t;
+    },
+    easeOutQuint(t) {
+      return 1 + --t * t * t * t * t;
+    },
+    easeInOutQuint(t) {
+      return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t;
+    }
+  };
 
-function scrollIt(destination, duration = 200, easing = 'linear', callback = () => { }) {
+  const start = window.pageYOffset;
+  const startTime =
+    "now" in window.performance ? performance.now() : new Date().getTime();
 
-    const easings = {
-        linear(t) {
-            return t;
-        },
-        easeInQuad(t) {
-            return t * t;
-        },
-        easeOutQuad(t) {
-            return t * (2 - t);
-        },
-        easeInOutQuad(t) {
-            return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-        },
-        easeInCubic(t) {
-            return t * t * t;
-        },
-        easeOutCubic(t) {
-            return (--t) * t * t + 1;
-        },
-        easeInOutCubic(t) {
-            return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-        },
-        easeInQuart(t) {
-            return t * t * t * t;
-        },
-        easeOutQuart(t) {
-            return 1 - (--t) * t * t * t;
-        },
-        easeInOutQuart(t) {
-            return t < 0.5 ? 8 * t * t * t * t : 1 - 8 * (--t) * t * t * t;
-        },
-        easeInQuint(t) {
-            return t * t * t * t * t;
-        },
-        easeOutQuint(t) {
-            return 1 + (--t) * t * t * t * t;
-        },
-        easeInOutQuint(t) {
-            return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * (--t) * t * t * t * t;
-        }
-    };
+  const documentHeight = Math.max(
+    document.body.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.clientHeight,
+    document.documentElement.scrollHeight,
+    document.documentElement.offsetHeight
+  );
+  const windowHeight =
+    window.innerHeight ||
+    document.documentElement.clientHeight ||
+    document.getElementsByTagName("body")[0].clientHeight;
+  const destinationOffset =
+    typeof destination === "number" ? destination : destination.offsetTop;
+  const destinationOffsetToScroll = Math.round(
+    documentHeight - destinationOffset < windowHeight
+      ? documentHeight - windowHeight
+      : destinationOffset
+  );
 
-    const start = window.pageYOffset;
-    const startTime = 'now' in window.performance ? performance.now() : new Date().getTime();
+  if ("requestAnimationFrame" in window === false) {
+    window.scroll(0, destinationOffsetToScroll);
+    if (callback) {
+      callback();
+    }
+    return;
+  }
 
-    const documentHeight = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
-    const destinationOffset = typeof destination === 'number' ? destination : destination.offsetTop;
-    const destinationOffsetToScroll = Math.round(documentHeight - destinationOffset < windowHeight ? documentHeight - windowHeight : destinationOffset);
+  function scroll() {
+    const now =
+      "now" in window.performance ? performance.now() : new Date().getTime();
+    const time = Math.min(1, (now - startTime) / duration);
+    const timeFunction = easings[easing](time);
+    window.scroll(
+      0,
+      Math.ceil(timeFunction * (destinationOffsetToScroll - start) + start)
+    );
 
-    if ('requestAnimationFrame' in window === false) {
-        window.scroll(0, destinationOffsetToScroll);
-        if (callback) {
-            callback();
-        }
-        return;
+    if (window.pageYOffset === destinationOffsetToScroll) {
+      if (callback) {
+        callback();
+      }
+      return;
     }
 
-    function scroll() {
-        const now = 'now' in window.performance ? performance.now() : new Date().getTime();
-        const time = Math.min(1, ((now - startTime) / duration));
-        const timeFunction = easings[easing](time);
-        window.scroll(0, Math.ceil((timeFunction * (destinationOffsetToScroll - start)) + start));
+    requestAnimationFrame(scroll);
+  }
 
-        if (window.pageYOffset === destinationOffsetToScroll) {
-            if (callback) {
-                callback();
-            }
-            return;
-        }
-
-        requestAnimationFrame(scroll);
-    }
-
-    scroll();
+  scroll();
 }
 
 function getNavigationBarMarginTop() {
-    if (window.innerWidth > 710) {
-        const style = window.getComputedStyle ? getComputedStyle(navigationBar, null) : navigationBar.currentStyle;
-        return parseInt(style.paddingTop, 10);
-    }
-    // else {
-    //     const element = document.querySelector('.nav__link-bordered');
-    //     console.log(element.offsetTop);
-    //     return element.offsetTop-3;
-    // }
+  if (window.innerWidth > 710) {
+    const style = window.getComputedStyle
+      ? getComputedStyle(navigationBar, null)
+      : navigationBar.currentStyle;
+    return parseInt(style.paddingTop, 10);
+  }
+  // else {
+  //     const element = document.querySelector('.nav__link-bordered');
+  //     console.log(element.offsetTop);
+  //     return element.offsetTop-3;
+  // }
 }
 
 function slideNavigationBar() {
-    navigationBar.style.marginTop = (window.scrollY < navigationBarMarginTop) ?
-        -window.scrollY + 'px' :
-        -navigationBarMarginTop + 'px';
+  navigationBar.style.marginTop =
+    window.scrollY < navigationBarMarginTop
+      ? -window.scrollY + "px"
+      : -navigationBarMarginTop + "px";
 }
 
 function scrollToTop() {
-    scrollIt(top, 500, 'easeOutQuint');
-    window.location.hash = '';
+  scrollIt(top, 500, "easeOutQuint");
+  window.location.hash = "";
 }
 
 function disableScrolling() {
-    var x = window.scrollX;
-    var y = window.scrollY;
-    window.onscroll = function () { window.scrollTo(x, y); };
+  var x = window.scrollX;
+  var y = window.scrollY;
+  window.onscroll = function() {
+    window.scrollTo(x, y);
+  };
 }
 
 function enableScrolling() {
-    window.onscroll = function () { };
+  window.onscroll = function() {};
 }
