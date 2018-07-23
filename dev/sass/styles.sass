@@ -9,6 +9,10 @@ $black: #1a1a1a
     justify-content: center
     align-items: center
 
+h1 
+    font-size: 48px
+
+
 body
     @extend %flex-center
     font-family: Roboto
@@ -22,8 +26,12 @@ body
     overflow-x: hidden
     overflow-y: auto
 
+.body-bg
+    background: url(/assets/bg2.png);
+    background-attachment: fixed;
+    background-size: cover;    
+
 a
-    text-decoration: none
     color: inherit
 
 .animate-in
@@ -45,6 +53,10 @@ a
     z-index: 99
     pointer-events: none
     transition: background .4s
+.nav,
+.footer    
+    a
+        text-decoration: none
 
 .bg
     background: $black
@@ -141,6 +153,55 @@ a
     // margin-top: 135px
     position: relative
 
+.about
+    
+    display: flex
+    justify-content: flex-start
+    align-items: flex-start
+    flex-direction: row
+    flex-wrap: wrap
+    align-content: center
+    box-sizing: border-box
+    min-height: calc(100vh - 165px)
+    width: 100vw
+    padding-top: 165px
+    .content
+        box-sizing: border-box
+        &:first-of-type, 
+        &:last-of-type 
+            flex: 0 0 60%
+            padding-right: 120px
+        &:nth-of-type(2) 
+            flex: 0 0 40%
+        h1
+            color: white
+            padding-bottom: 40px
+        p
+            line-height: 34px
+        ul
+            line-height: 48px
+            list-style: none
+            padding: 0 0 30px 0
+        li,
+        a,
+        p        
+            font-size: 18px
+        li,
+        p    
+            padding-left: 65px
+            &:before
+                content: ''
+                width: 50px
+                border: .5px white solid
+                height: 0px
+                display:  block
+                transform: translateX(-65px) translateY(18px)
+
+    &+.footer
+        background-color: transparent
+
+        bottom: 0
+
 .wrapper
     pointer-events: none
     @extend %flex-center
@@ -170,8 +231,7 @@ a
         font-size: 1.4rem
         font-weight: 700
         margin-right: 10px
-    a
-        text-decoration: underline
+    
     &:hover
         color: white
 
@@ -256,6 +316,8 @@ a
 
     &:hover
         opacity: 1
+
+
 
 @media (max-width: 1100px)
     $columns: 2
