@@ -235,7 +235,7 @@ a
     &:hover
         color: white
 
-.projects
+.project_pages
     @extend %flex-center
     flex-wrap: wrap
 
@@ -292,7 +292,24 @@ a
     h3
         font-size: 44px
         color: white
-        
+
+.project_page
+    @extend .container
+    height: calc(100vh - 135px)
+    margin-top: 135px
+    position: relative
+    justify-content: flex-start
+    align-content: flex-start
+    flex-direction: row
+    .project_name
+        color: white
+        margin-top: 5rem
+        font-size: 48px
+    .project_desc
+        color: white
+        font-size: 1.2em
+        margin-top: 3rem
+
 
 .footer
     @extend %flex-center
@@ -393,6 +410,7 @@ a
         .hamburger-inner:after, 
         .hamburger-inner:before      
             background-color: black
+
     .main  
         height: calc(100vh - 55px)
         margin-top: 55px   
@@ -402,6 +420,15 @@ a
         line-height: 48px 
         padding: 0 15px  
         max-width: 80%
+
+    .project
+        height: calc(100vh - 55px)
+        margin-top: 55px   
+        text-align: left
+
+    .project_name
+        font-size: 44px
+
 
 @media (max-width: 710px), (max-height: 600px) 
     .scroll-downs
