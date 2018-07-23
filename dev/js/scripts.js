@@ -17,22 +17,23 @@ menuLinks.forEach(link => {
     link.addEventListener('click', toggleCollapseMenu);
 });
 
-
-
 hashAnchors.forEach(anchor => {
     anchor.addEventListener('click', () => scrollIt(document.querySelector(anchor.hash).offsetTop - navigationOffset, 500));
 });
 
 // window.addEventListener('scroll', debounce(showProject));
 window.addEventListener('scroll', slideNavigationBar);
+window.addEventListener('beforeunload', animateOut);
 backArrow.addEventListener('click', scrollToTop);
-
 hamburgerButton.addEventListener('click', toggleCollapseMenu);
 
 
 
 particlesJS.load('particles-js', 'js/particlesjs-config.json');
 
+function animateOut() {
+    document.body.classList.add('animate-out');
+}
 
 function toggleCollapseMenu() {
     if (window.innerWidth <= 710) {
@@ -171,6 +172,13 @@ function slideNavigationBar() {
     navigationBar.style.marginTop = (window.scrollY < navigationBarMarginTop) ?
         -window.scrollY + 'px' :
         -navigationBarMarginTop + 'px';
+
+        if(window.scrollY >= navigationBarMarginTop) {
+            navigationBar.classList.add('bg');
+        } else {
+            navigationBar.classList.remove('bg');
+        }
+
 }
 
 function scrollToTop() {
