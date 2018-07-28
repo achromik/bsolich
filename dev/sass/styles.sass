@@ -9,7 +9,7 @@ $black: #1a1a1a
     justify-content: center
     align-items: center
 
-h1 
+h1
     font-size: 48px
 
 
@@ -27,9 +27,17 @@ body
     overflow-y: auto
 
 .body-bg
-    background: url(/assets/bg2.png);
-    background-attachment: fixed;
-    background-size: cover;    
+    background: url(/assets/bg2.png)
+    background-attachment: fixed
+    background-size: cover
+    height: 100vh
+    width: 100vw
+    position: fixed
+    z-index: -1
+    left: 0
+    top: 0
+    bottom: 0
+    right: 0
 
 a
     color: inherit
@@ -37,7 +45,7 @@ a
 .animate-in
     animation: fadeIn .5s ease-in
 
-@keyframes fadeIn 
+@keyframes fadeIn
     from
         opacity: 0
     to
@@ -51,10 +59,10 @@ a
     position: fixed
     padding-top: 60px
     z-index: 99
-    pointer-events: none
+    // pointer-events: none
     transition: background .4s
 .nav,
-.footer    
+.footer
     a
         text-decoration: none
 
@@ -84,7 +92,7 @@ a
 .nav__logo
     pointer-events: initial
     img
-        display: block        
+        display: block
 
 .nav__link
     height: 45px
@@ -100,7 +108,7 @@ a
     border: 2px solid #303030
     width: 110px
 .hamburger
-    display: none    
+    display: none
 
 .scroll-downs
     position: absolute
@@ -154,7 +162,7 @@ a
     position: relative
 
 .about
-    
+
     display: flex
     justify-content: flex-start
     align-items: flex-start
@@ -167,15 +175,19 @@ a
     padding-top: 165px
     .content
         box-sizing: border-box
-        &:first-of-type, 
-        &:last-of-type 
+        margin: 20px 0
+
+        &:nth-of-type(odd)
             flex: 0 0 60%
             padding-right: 120px
-        &:nth-of-type(2) 
+
+        &:nth-of-type(even)
             flex: 0 0 40%
         h1
             color: white
             padding-bottom: 40px
+        h3
+            color: white
         p
             line-height: 34px
         ul
@@ -184,10 +196,10 @@ a
             padding: 0 0 30px 0
         li,
         a,
-        p        
+        p
             font-size: 18px
         li,
-        p    
+        p
             padding-left: 65px
             &:before
                 content: ''
@@ -216,7 +228,7 @@ a
     max-width: 800px
     text-align: center
     color: #9f9f9f
-    
+
 
 .main__text-lightner
     color: white
@@ -231,11 +243,11 @@ a
         font-size: 1.4rem
         font-weight: 700
         margin-right: 10px
-    
+
     &:hover
         color: white
 
-.project_pages
+.projects
     @extend %flex-center
     flex-wrap: wrap
 
@@ -342,20 +354,25 @@ a
     .project
         width: calc(100% / #{$columns})
 
-@media (max-width: 710px) and (max-height: 400px) 
+    .about
+        flex-direction: column
+
+
+
+@media (max-width: 710px) and (max-height: 400px)
     $columns: 2
 
     .project
         width: calc(100% / #{$columns})
 
-@media (max-width: 710px) and (min-height: 401px) 
+@media (max-width: 710px) and (min-height: 401px)
     $columns: 1
 
     .project
         width: calc(100% / #{$columns})
 
 
-@media (max-width: 710px) 
+@media (max-width: 710px)
     body
         font-size: 14px
 
@@ -367,12 +384,13 @@ a
         position: fixed
 
     .nav__links
-        position: absolute
+        position: fixed
         top: 0
         left: 0
         right: 0
-        width: 100vw
-        height: 100vh 
+        bottom: 0
+        // width: 100vw
+        // height: 100vh
         transition: .4s linear
         background: white
         color: $black
@@ -380,13 +398,13 @@ a
         flex-direction: column
         transform: translateX(-100%)
         box-sizing: border-box
-        
+
     .fixed
         transform: translateX(0)
         transition: .4s cubic-bezier(0, 0.45, 0.56, 0.96)
 
     .logo__image-inverted
-        filter: invert(100%)    
+        filter: invert(100%)
         transition: .3s .4s linear
 
     .nav__link
@@ -403,46 +421,53 @@ a
         border: none
 
     .hamburger
-        display: inline-block  
-    
-    .is-active 
-        .hamburger-inner, 
-        .hamburger-inner:after, 
-        .hamburger-inner:before      
+        display: inline-block
+
+    .is-active
+        .hamburger-inner,
+        .hamburger-inner:after,
+        .hamburger-inner:before
             background-color: black
 
-    .main  
+    .main
         height: calc(100vh - 55px)
-        margin-top: 55px   
+        margin-top: 55px
 
     .main__text
         font-size: 44px
-        line-height: 48px 
-        padding: 0 15px  
+        line-height: 48px
+        padding: 0 15px
         max-width: 80%
 
-    .project
-        height: calc(100vh - 55px)
-        margin-top: 55px   
-        text-align: left
-
-    .project_name
-        font-size: 44px
+    .about
+        .content
+            &:nth-of-type(odd)
+                padding-right: 0
 
 
-@media (max-width: 710px), (max-height: 600px) 
+@media (max-width: 710px), (max-height: 600px)
     .scroll-downs
-        display: none          
+        display: none
 
 @media (max-width: 450px)
     .main__text
         font-size: 34px
-        line-height: 40px 
-        padding: 0 15px  
+        line-height: 40px
+        padding: 0 15px
 
     .footer
-        height: 120px    
+        height: 120px
 
     .footer__coder,
     .footer__rights
         font-size: 11px
+
+    .about
+        align-items: center
+        .content
+            text-align: center
+            li,
+            p
+                padding-left: 0
+                &:before
+                    content: none
