@@ -59,7 +59,7 @@ a
     position: fixed
     padding-top: 60px
     z-index: 99
-    pointer-events: none
+    // pointer-events: none
     transition: background .4s
 .nav,
 .footer
@@ -175,15 +175,19 @@ a
     padding-top: 165px
     .content
         box-sizing: border-box
-        &:first-of-type,
-        &:last-of-type
+        margin: 20px 0
+
+        &:nth-of-type(odd)
             flex: 0 0 60%
             padding-right: 120px
-        &:nth-of-type(2)
+
+        &:nth-of-type(even)
             flex: 0 0 40%
         h1
             color: white
             padding-bottom: 40px
+        h3
+            color: white
         p
             line-height: 34px
         ul
@@ -350,6 +354,11 @@ a
     .project
         width: calc(100% / #{$columns})
 
+    .about
+        flex-direction: column
+
+
+
 @media (max-width: 710px) and (max-height: 400px)
     $columns: 2
 
@@ -375,12 +384,13 @@ a
         position: fixed
 
     .nav__links
-        position: absolute
+        position: fixed
         top: 0
         left: 0
         right: 0
-        width: 100vw
-        height: 100vh
+        bottom: 0
+        // width: 100vw
+        // height: 100vh
         transition: .4s linear
         background: white
         color: $black
@@ -429,6 +439,11 @@ a
         padding: 0 15px
         max-width: 80%
 
+    .about
+        .content
+            &:nth-of-type(odd)
+                padding-right: 0
+
 
 @media (max-width: 710px), (max-height: 600px)
     .scroll-downs
@@ -446,3 +461,13 @@ a
     .footer__coder,
     .footer__rights
         font-size: 11px
+
+    .about
+        align-items: center
+        .content
+            text-align: center
+            li,
+            p
+                padding-left: 0
+                &:before
+                    content: none
