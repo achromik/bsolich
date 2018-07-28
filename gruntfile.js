@@ -21,14 +21,14 @@ module.exports = function (grunt) {
         postcss: {
             options: {
                 map: {
-                    inline: false // save all sourcemaps as separate files... 
-                    // annotation: 'css' // ...to the specified directory 
+                    inline: false // save all sourcemaps as separate files...
+                    // annotation: 'css' // ...to the specified directory
                 },
 
                 processors: [
-                    require('pixrem')(), // add fallbacks for rem units 
-                    require('autoprefixer')({ browsers: 'last 2 versions' }), // add vendor prefixes 
-                    require('cssnano')() // minify the result 
+                    require('pixrem')(), // add fallbacks for rem units
+                    require('autoprefixer')({ browsers: 'last 2 versions' }), // add vendor prefixes
+                    require('cssnano')() // minify the result
                 ]
             },
             dev: {
@@ -265,8 +265,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-real-favicon');
 
     // Default task(s).
-    grunt.registerTask('default', ['sass:dev', 'jshint', 'postcss:dev', 'uglify:dev', 'browserSync', 'watch']);
-    grunt.registerTask('build', ['clean', 'realFavicon', 'sass', 'jshint', 'postcss:dev', 'uglify:dev', 'copy', 'imagemin', 'htmlmin']);
+    grunt.registerTask('default', ['sass:dev', 'postcss:dev', 'uglify:dev', 'browserSync', 'watch']);
+    grunt.registerTask('build', ['clean', 'realFavicon', 'sass', 'postcss:dev', 'uglify:dev', 'copy', 'imagemin', 'htmlmin']);
     grunt.registerTask('deploy', ['build', 'gh-pages']);
 
     // grunt.registerTask('default', ['sass', 'jshint', 'postcss:dev', 'uglify:dev', 'htmlmin', 'browserSync', 'watch']);
