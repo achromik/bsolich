@@ -402,17 +402,32 @@ a
         bottom: 0
         // width: 100vw
         // height: 100vh
-        transition: .4s linear
-        background: white
-        color: $black
+        transition: transform .4s linear, background-color .4s .4s linear
+        background-color: transparent
+        color: transparent
         z-index: -1
         flex-direction: column
         transform: translateX(-100%)
         box-sizing: border-box
+        .nav__link
+            // color: transparent
+            visibility: hidden
+            // opacity: 0
+            transition: none
+            // transition: color .4s .4s linear
+
+
 
     .fixed
-        transform: translateX(0)
-        transition: .4s cubic-bezier(0, 0.45, 0.56, 0.96)
+        color: black
+        background-color: white
+        transform:  translateX(0)
+        transition: transform .4s cubic-bezier(0, 0.45, 0.56, 0.96)
+        .nav__link
+            color: black
+            visibility: visible
+            // opacity: 1
+
 
     .logo__image-inverted
         filter: invert(100%)
