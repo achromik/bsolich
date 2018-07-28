@@ -307,8 +307,9 @@ a
 
 .project_page
     @extend .container
-    height: calc(100vh - 135px)
+    // height: calc(100vh - 135px)
     margin-top: 135px
+    margin-bottom: 135px
     position: relative
     justify-content: flex-start
     align-content: flex-start
@@ -321,6 +322,16 @@ a
         color: white
         font-size: 1.2em
         margin-top: 3rem
+.project__details
+    display: flex
+    flex-wrap: wrap
+    line-height: 0
+    .flex-100
+        flex: 0 0 100%
+    .flex-50
+        flex: 0 0 50%
+    img
+        max-width: 100%
 
 
 .footer
