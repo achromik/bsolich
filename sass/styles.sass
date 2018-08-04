@@ -1,6 +1,6 @@
 $columns: 3
 $black: #1a1a1a
-
+$screen-md: 768px
 *
     margin: 0
 
@@ -11,6 +11,18 @@ $black: #1a1a1a
 
 h1
     font-size: 48px
+
+
+.flex-100
+    flex: 0 0 100%
+
+.flex-50
+    flex: 0 0 100%
+
+    @media screen and (min-width: $screen-md)
+        flex: 0 0 50%
+
+
 
 
 body
@@ -322,16 +334,20 @@ a
         color: white
         font-size: 1.2em
         margin-top: 3rem
+    .project_abstract
+        margin-top: 15px
+    a
+        color: #0882D5
+        margin-top: 20px
+        display: block
+
 .project__details
     display: flex
     flex-wrap: wrap
     line-height: 0
-    .flex-100
-        flex: 0 0 100%
-    .flex-50
-        flex: 0 0 50%
     img
         max-width: 100%
+        font-size: 0
 
 
 .footer
