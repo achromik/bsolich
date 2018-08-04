@@ -1,6 +1,6 @@
 $columns: 3
 $black: #1a1a1a
-
+$screen-md: 768px
 *
     margin: 0
 
@@ -11,6 +11,18 @@ $black: #1a1a1a
 
 h1
     font-size: 48px
+
+
+.flex-100
+    flex: 0 0 100%
+
+.flex-50
+    flex: 0 0 100%
+
+    @media screen and (min-width: $screen-md)
+        flex: 0 0 50%
+
+
 
 
 body
@@ -27,7 +39,7 @@ body
     overflow-y: auto
 
 .body-bg
-    background: url(/assets/bg2.png)
+    background: url('../assets/bg2.png')
     background-attachment: fixed
     background-size: cover
     height: 100vh
@@ -307,8 +319,9 @@ a
 
 .project_page
     @extend .container
-    height: calc(100vh - 135px)
+    // height: calc(100vh - 135px)
     margin-top: 135px
+    margin-bottom: 135px
     position: relative
     justify-content: flex-start
     align-content: flex-start
@@ -321,6 +334,20 @@ a
         color: white
         font-size: 1.2em
         margin-top: 3rem
+    .project_abstract
+        margin-top: 15px
+    a
+        color: #0882D5
+        margin-top: 20px
+        display: block
+
+.project__details
+    display: flex
+    flex-wrap: wrap
+    line-height: 0
+    img
+        max-width: 100%
+        font-size: 0
 
 
 .footer
@@ -391,17 +418,32 @@ a
         bottom: 0
         // width: 100vw
         // height: 100vh
-        transition: .4s linear
-        background: white
-        color: $black
+        transition: transform .4s linear, background-color .4s .4s linear
+        background-color: transparent
+        color: transparent
         z-index: -1
         flex-direction: column
         transform: translateX(-100%)
         box-sizing: border-box
+        .nav__link
+            // color: transparent
+            visibility: hidden
+            // opacity: 0
+            transition: none
+            // transition: color .4s .4s linear
+
+
 
     .fixed
-        transform: translateX(0)
-        transition: .4s cubic-bezier(0, 0.45, 0.56, 0.96)
+        color: black
+        background-color: white
+        transform:  translateX(0)
+        transition: transform .4s cubic-bezier(0, 0.45, 0.56, 0.96)
+        .nav__link
+            color: black
+            visibility: visible
+            // opacity: 1
+
 
     .logo__image-inverted
         filter: invert(100%)
