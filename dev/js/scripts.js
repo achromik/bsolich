@@ -5,7 +5,7 @@ const navigationBarMarginTop = getNavigationBarMarginTop();
 const backArrow = document.querySelector('.back__arrow');
 const top = document.querySelector('body');
 
-const hashAnchors = document.querySelectorAll('a[href*="#"]');
+const hashAnchors = document.querySelectorAll('a[href^="#"]');
 const navigationOffset = parseInt(getComputedStyle(document.querySelector('.nav')).height, 10);
 
 const hamburgerButton = document.querySelector('.hamburger');
