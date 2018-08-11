@@ -103,6 +103,8 @@ a
     pointer-events: initial
     img
         display: block
+.logo__image
+    width: 160px
 
 .nav__link
     height: 45px
@@ -268,7 +270,8 @@ a
     margin-top: 25px
     pointer-events: initial
     // font-weight: 700
-    span
+    span,
+    .fa-envelope
         font-size: 1.4rem
         font-weight: 700
         margin-right: 10px
@@ -467,6 +470,9 @@ a
             transition: .2s
             color: $black
 
+    .logo__image
+        width: 120px
+
     .nav__link-bordered
         // width: 95px
         border: none
@@ -494,6 +500,12 @@ a
         .content
             &:nth-of-type(odd)
                 padding-right: 0
+
+    .project_page
+        margin-bottom: 85px
+        margin-top: 85px
+        .project_name
+            margin-top: 0
 
 
 @media (max-width: 710px), (max-height: 600px)
