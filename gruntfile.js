@@ -132,7 +132,7 @@ module.exports = function(grunt) {
             main: {
                 expand: true,
                 cwd: 'dev',
-                src: ['**/*.min*', '**/*.sass', '**/*.json', 'assets/icons/*'],
+                src: ['**/*.min*', '**/*.sass', '**/*.json', 'assets/icons/*', '**/*.svg'],
                 dest: 'build/',
             },
         },
