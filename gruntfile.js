@@ -201,7 +201,7 @@ module.exports = function(grunt) {
                 src: 'dev/src/favicon.png',
                 dest: 'dev/assets/icons',
                 options: {
-                    iconsPath: 'assets/icons',
+                    iconsPath: '/assets/icons',
                     html: ['dev/**/*.html'],
                     design: {
                         ios: {
@@ -280,10 +280,16 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-real-favicon');
 
     // Default task(s).
-    grunt.registerTask('default', ['sass:dev', 'postcss:dev', 'uglify:dev', 'browserSync', 'watch']);
+    grunt.registerTask('default', [
+        'sass:dev',
+        'postcss:dev',
+        'uglify:dev',
+        'browserSync',
+        'watch',
+    ]);
     grunt.registerTask('build', [
         'clean',
-        'realFavicon',
+        // 'realFavicon',
         'sass',
         'postcss:dev',
         'uglify:dev',
