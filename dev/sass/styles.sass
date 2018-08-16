@@ -1,6 +1,6 @@
 $columns: 3
 $black: #1a1a1a
-
+$screen-md: 768px
 *
     margin: 0
 
@@ -12,6 +12,14 @@ $black: #1a1a1a
 h1
     font-size: 48px
 
+.flex-100
+    flex: 0 0 100%
+
+.flex-50
+    flex: 0 0 100%
+
+    @media screen and (min-width: $screen-md)
+        flex: 0 0 50%
 
 body
     @extend %flex-center
@@ -27,7 +35,7 @@ body
     overflow-y: auto
 
 .body-bg
-    background: url(/assets/bg2.png)
+    background: url('../assets/bg2.png')
     background-attachment: fixed
     background-size: cover
     height: 100vh
@@ -40,7 +48,9 @@ body
     right: 0
 
 a
-    color: inherit
+    color: #b5b5b5
+    &:hover
+        color: #fff
 
 .animate-in
     animation: fadeIn .5s ease-in
@@ -93,6 +103,8 @@ a
     pointer-events: initial
     img
         display: block
+.logo__image
+    width: 160px
 
 .nav__link
     height: 45px
@@ -188,8 +200,7 @@ a
             padding-bottom: 40px
         h3
             color: white
-        p
-            line-height: 34px
+
         ul
             line-height: 48px
             list-style: none
@@ -198,9 +209,12 @@ a
         a,
         p
             font-size: 18px
+        li
+            margin-top: 8px
         li,
         p
             padding-left: 65px
+            line-height: 34px
             &:before
                 content: ''
                 width: 50px
@@ -208,6 +222,23 @@ a
                 height: 0px
                 display:  block
                 transform: translateX(-65px) translateY(18px)
+        .talk
+            margin-top: 30px
+            position: relative
+            a
+                color:#0882d5
+                font-weight: bold
+                &:hover
+                    color: #025f9e
+
+            .fa-envelope
+                transform: translateX(-65px)
+                top: 6px
+                position: absolute
+                font-size: 22px
+            &:before
+                // content:
+                border: 0
 
     &+.footer
         background-color: transparent
@@ -239,7 +270,8 @@ a
     margin-top: 25px
     pointer-events: initial
     // font-weight: 700
-    span
+    span,
+    .fa-envelope
         font-size: 1.4rem
         font-weight: 700
         margin-right: 10px
@@ -253,16 +285,6 @@ a
 
 .project
     width: calc(100% / #{$columns})
-
-    // // opacity: 0
-    // transition: 0.6s ease-in
-    // // transform: scale(0.75) rotateZ(90deg)
-    // &:nth-of-type(2n)
-    //     transform: scale(0.75) rotateZ(-90deg)
-
-    // &.active
-    //     opacity: 1
-    //     transform: scale(1)
 
 .project__link
     height: 100%
@@ -307,8 +329,9 @@ a
 
 .project_page
     @extend .container
-    height: calc(100vh - 135px)
+    // height: calc(100vh - 135px)
     margin-top: 135px
+    margin-bottom: 135px
     position: relative
     justify-content: flex-start
     align-content: flex-start
@@ -321,7 +344,23 @@ a
         color: white
         font-size: 1.2em
         margin-top: 3rem
+    .project_abstract
+        margin-top: 15px
+    a
+        color: #0882D5
+        margin-top: 20px
+        display: block
+        font-weight: bold
+        &:hover
+            color: #025f9e
 
+
+.project__details
+    display: flex
+    flex-wrap: wrap
+    line-height: 0
+    img
+        width: 100%
 
 .footer
     @extend %flex-center
@@ -391,17 +430,32 @@ a
         bottom: 0
         // width: 100vw
         // height: 100vh
-        transition: .4s linear
-        background: white
-        color: $black
+        transition: transform .4s linear, background-color .4s .4s linear
+        background-color: transparent
+        color: transparent
         z-index: -1
         flex-direction: column
         transform: translateX(-100%)
         box-sizing: border-box
+        .nav__link
+            // color: transparent
+            visibility: hidden
+            // opacity: 0
+            transition: none
+            // transition: color .4s .4s linear
+
+
 
     .fixed
-        transform: translateX(0)
-        transition: .4s cubic-bezier(0, 0.45, 0.56, 0.96)
+        color: black
+        background-color: white
+        transform:  translateX(0)
+        transition: transform .4s cubic-bezier(0, 0.45, 0.56, 0.96)
+        .nav__link
+            color: black
+            visibility: visible
+            // opacity: 1
+
 
     .logo__image-inverted
         filter: invert(100%)
@@ -415,6 +469,9 @@ a
             transform: scale(1.15)
             transition: .2s
             color: $black
+
+    .logo__image
+        width: 120px
 
     .nav__link-bordered
         // width: 95px
@@ -443,6 +500,12 @@ a
         .content
             &:nth-of-type(odd)
                 padding-right: 0
+
+    .project_page
+        margin-bottom: 85px
+        margin-top: 85px
+        .project_name
+            margin-top: 0
 
 
 @media (max-width: 710px), (max-height: 600px)

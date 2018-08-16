@@ -1,66 +1,70 @@
-module.exports = function (grunt) {
-
+module.exports = function(grunt) {
     grunt.initConfig({
-
         sass: {
             options: {
                 sourceMap: true,
                 sourceMapEmbed: true,
             },
             dev: {
-                files: [{
-                    expand: true,
-                    cwd: 'dev/sass',
-                    src: ['**/*.sass', 'hamburgers.scss'],
-                    dest: 'dev/css',
-                    ext: '.css'
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'dev/sass',
+                        src: ['**/*.sass', 'hamburgers.scss'],
+                        dest: 'dev/css',
+                        ext: '.css',
+                    },
+                ],
             },
         },
 
         postcss: {
             options: {
                 map: {
-                    inline: false // save all sourcemaps as separate files...
+                    inline: false, // save all sourcemaps as separate files...
                     // annotation: 'css' // ...to the specified directory
                 },
 
                 processors: [
                     require('pixrem')(), // add fallbacks for rem units
                     require('autoprefixer')({ browsers: 'last 2 versions' }), // add vendor prefixes
-                    require('cssnano')() // minify the result
-                ]
+                    require('cssnano')(), // minify the result
+                ],
             },
             dev: {
-                files: [{
-                    expand: true,
-                    cwd: 'dev/css',
-                    src: ['*.css', "!*.min.css"],
-                    dest: 'dev/css',
-                    ext: '.min.css'
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'dev/css',
+                        src: ['*.css', '!*.min.css'],
+                        dest: 'dev/css',
+                        ext: '.min.css',
+                    },
+                ],
             },
         },
 
         imagemin: {
             options: {
-                optimizationLevel: 3
+                optimizationLevel: 3,
             },
             dynamic: {
-                files: [{
-                    expand: true,
-                    cwd: 'dev/assets/',
-                    src: ['**/*.{png,jpg,jpeg,gif}', '!icons/**'],
-                    dest: 'build/assets/'
-                }]
-            }
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'dev/assets/',
+                        src: ['**/*.{png,jpg,jpeg,gif}', '!icons/**'],
+                        dest: 'build/assets/',
+                    },
+                ],
+            },
         },
 
         jshint: {
             options: {
-                esversion: 6
+                esversion: 6,
             },
-            all: ['dev/js/*.js', '!dev/js/*.min.js']
+            all: ['dev/js/*.js', '!dev/js/*.min.js'],
         },
 
         uglify: {
@@ -68,66 +72,78 @@ module.exports = function (grunt) {
                 options: {
                     mangle: {
                         properties: false,
-                        toplevel: true
+                        toplevel: true,
                     },
                     sourceMap: {
                         includeSources: true,
-                    }
+                    },
                 },
-                files: [{
-                    expand: true,
-                    cwd: 'dev/js',
-                    src: ['*.js', '!*min.js'],
-                    dest: 'dev/js',
-                    ext: '.min.js'
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'dev/js',
+                        src: ['*.js', '!*min.js'],
+                        dest: 'dev/js',
+                        ext: '.min.js',
+                    },
+                ],
             },
         },
 
-        htmlmin: {                                     // Task
-            build: {                                      // Target
-                options: {                                 // Target options
+        htmlmin: {
+            // Task
+            build: {
+                // Target
+                options: {
+                    // Target options
                     removeComments: true,
-                    collapseWhitespace: true
+                    collapseWhitespace: true,
                 },
-                files: {                                   // Dictionary of files
-                    'build/index.html': 'dev/index.html'     // 'destination': 'source'
+                // files: {                                   // Dictionary of files
+                //     'build/index.html': 'dev/index.html'     // 'destination': 'source'
 
-                }
-            }
+                // }
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'dev',
+                        src: ['**/*.html', '*.html'],
+                        dest: 'build',
+                    },
+                ],
+            },
         },
 
         cssmin: {
             target: {
-                files: [{
-                    expand: true,
-                    cwd: 'css',
-                    src: ['**/*.css', '!**/*.min.css'],
-                    dest: 'css',
-                    ext: '.min.css'
-                }]
-
-            }
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'css',
+                        src: ['**/*.css', '!**/*.min.css'],
+                        dest: 'css',
+                        ext: '.min.css',
+                    },
+                ],
+            },
         },
 
         copy: {
             main: {
                 expand: true,
                 cwd: 'dev',
-                src: ['**/*.min*', '**/*.sass', '**/*.json', 'assets/icons/*'],
+                src: ['**/*.min*', '**/*.sass', '**/*.json', 'assets/icons/*', '**/*.svg'],
                 dest: 'build/',
             },
         },
 
-        clean: [
-            'build'
-        ],
+        clean: ['build'],
 
         'gh-pages': {
             options: {
-                base: 'build'
+                base: 'build',
             },
-            src: ['**']
+            src: ['**'],
         },
 
         watch: {
@@ -149,7 +165,8 @@ module.exports = function (grunt) {
 
             scripts: {
                 files: ['dev/js/**/*.js', '!dev/js/**/*.min.js'],
-                tasks: ['uglify:dev', 'jshint'],
+                // tasks: ['uglify:dev', 'jshint'],
+                tasks: ['uglify:dev'],
                 // tasks: ['jshint'],
                 options: {
                     spawn: true,
@@ -168,16 +185,16 @@ module.exports = function (grunt) {
         browserSync: {
             dev: {
                 bsFiles: {
-                    src: ['dev/css/*.css', 'dev/*.html', 'dev/js/*.js']
+                    src: ['dev/css/*.css', 'dev/*.html', 'dev/js/*.js'],
                 },
                 options: {
                     spawn: false,
                     watchTask: true,
                     server: {
-                        baseDir: "./dev"
-                    }
-                }
-            }
+                        baseDir: './dev',
+                    },
+                },
+            },
         },
         realFavicon: {
             favicons: {
@@ -185,7 +202,7 @@ module.exports = function (grunt) {
                 dest: 'dev/assets/icons',
                 options: {
                     iconsPath: '/assets/icons',
-                    html: ['dev/*.html'],
+                    html: ['dev/**/*.html'],
                     design: {
                         ios: {
                             pictureAspect: 'noChange',
@@ -193,8 +210,8 @@ module.exports = function (grunt) {
                                 ios6AndPriorIcons: false,
                                 ios7AndLaterIcons: false,
                                 precomposedIcons: false,
-                                declareOnlyDefaultIcon: true
-                            }
+                                declareOnlyDefaultIcon: true,
+                            },
                         },
                         desktopBrowser: {},
                         windows: {
@@ -207,9 +224,9 @@ module.exports = function (grunt) {
                                     small: false,
                                     medium: true,
                                     big: false,
-                                    rectangle: false
-                                }
-                            }
+                                    rectangle: false,
+                                },
+                            },
                         },
                         androidChrome: {
                             pictureAspect: 'noChange',
@@ -218,31 +235,29 @@ module.exports = function (grunt) {
                                 display: 'standalone',
                                 orientation: 'notSet',
                                 onConflict: 'override',
-                                declared: true
+                                declared: true,
                             },
                             assets: {
                                 legacyIcon: false,
-                                lowResolutionIcons: false
-                            }
+                                lowResolutionIcons: false,
+                            },
                         },
                         safariPinnedTab: {
                             pictureAspect: 'silhouette',
-                            themeColor: '#5bbad5'
-                        }
+                            themeColor: '#5bbad5',
+                        },
                     },
                     settings: {
                         scalingAlgorithm: 'Mitchell',
                         errorOnImageTooSmall: false,
                         readmeFile: false,
                         htmlCodeFile: false,
-                        usePathAsIs: false
-                    }
-                }
-            }
-        }
-
+                        usePathAsIs: false,
+                    },
+                },
+            },
+        },
     });
-
 
     // Load the plugins tasks
     grunt.loadNpmTasks('grunt-sass');
@@ -265,8 +280,23 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-real-favicon');
 
     // Default task(s).
-    grunt.registerTask('default', ['sass:dev', 'postcss:dev', 'uglify:dev', 'browserSync', 'watch']);
-    grunt.registerTask('build', ['clean', 'realFavicon', 'sass', 'postcss:dev', 'uglify:dev', 'copy', 'imagemin', 'htmlmin']);
+    grunt.registerTask('default', [
+        'sass:dev',
+        'postcss:dev',
+        'uglify:dev',
+        'browserSync',
+        'watch',
+    ]);
+    grunt.registerTask('build', [
+        'clean',
+        // 'realFavicon',
+        'sass',
+        'postcss:dev',
+        'uglify:dev',
+        'copy',
+        'imagemin',
+        'htmlmin',
+    ]);
     grunt.registerTask('deploy', ['build', 'gh-pages']);
 
     // grunt.registerTask('default', ['sass', 'jshint', 'postcss:dev', 'uglify:dev', 'htmlmin', 'browserSync', 'watch']);
